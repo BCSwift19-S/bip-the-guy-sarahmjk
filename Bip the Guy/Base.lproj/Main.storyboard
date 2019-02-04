@@ -18,33 +18,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image2" translatesAutoresizingMaskIntoConstraints="NO" id="7uu-T1-lSQ">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image2" translatesAutoresizingMaskIntoConstraints="NO" id="7uu-T1-lSQ">
                                 <rect key="frame" x="16" y="20" width="343" height="457"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="1Tr-38-Swi" appends="YES" id="CLa-j4-V6y"/>
+                                </connections>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose image to punch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocd-lR-VWC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Choose image to punch" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocd-lR-VWC">
                                 <rect key="frame" x="96" y="485" width="182" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="YlM-Xq-hNW"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7h-jr-URc">
-                                <rect key="frame" x="274" y="514" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c78-d3-uzc">
-                                <rect key="frame" x="19" y="514" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Photo Library"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="151" translatesAutoresizingMaskIntoConstraints="NO" id="MYB-6g-P8f">
+                                <rect key="frame" x="32" y="514" width="319" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c78-d3-uzc">
+                                        <rect key="frame" x="0.0" y="0.0" width="92" height="30"/>
+                                        <state key="normal" title="Photo Library"/>
+                                        <connections>
+                                            <action selector="libraryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RsC-VI-Bs4"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pGU-KJ-YG1">
+                                        <rect key="frame" x="243" y="0.0" width="76" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7h-jr-URc">
+                                                <rect key="frame" x="0.0" y="0.0" width="76" height="30"/>
+                                                <state key="normal" title="Take Photo"/>
+                                                <connections>
+                                                    <action selector="cameraPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0RQ-LO-n4t"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="7uu-T1-lSQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="27v-qQ-fRM"/>
+                            <constraint firstItem="7uu-T1-lSQ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="5YG-KV-Yvl"/>
+                            <constraint firstItem="Ocd-lR-VWC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="AN4-WI-lFH"/>
+                            <constraint firstItem="MYB-6g-P8f" firstAttribute="top" secondItem="Ocd-lR-VWC" secondAttribute="bottom" constant="8" symbolic="YES" id="DPA-Vh-Mqx"/>
+                            <constraint firstItem="7uu-T1-lSQ" firstAttribute="centerX" secondItem="Ocd-lR-VWC" secondAttribute="centerX" id="P6U-Dr-7Fv"/>
+                            <constraint firstItem="7uu-T1-lSQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="biM-bY-L0R"/>
+                            <constraint firstItem="MYB-6g-P8f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="gLH-PG-Ef5"/>
+                            <constraint firstItem="Ocd-lR-VWC" firstAttribute="top" secondItem="7uu-T1-lSQ" secondAttribute="bottom" constant="8" symbolic="YES" id="qor-kd-V9j"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MYB-6g-P8f" secondAttribute="bottom" constant="123" id="r9R-Ka-vqS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="imageToPunch" destination="7uu-T1-lSQ" id="7tw-a4-lV2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1Tr-38-Swi">
+                    <connections>
+                        <action selector="imageTapped:" destination="BYZ-38-t0r" id="bie-Au-g41"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
