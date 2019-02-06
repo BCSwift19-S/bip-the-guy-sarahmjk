@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    
     //MARK: properties
     @IBOutlet weak var imageToPunch: UIImageView!
+    
+    var audioPlayer = AVAudioPlayer ()
+    var imagePicker = UIImagePickerController ()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +35,74 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 10, options: [], animations: { self.imageToPunch.bounds = bounds}, completion: nil)
         
     }
+    
+    
+    
+    func playSound (soundName: String, audioPlayer: inout AVAudioPlayer) {
+        //load filesound name
+        if let sound = NSDataAsset (name:soundName) {
+            // check if it is a sound file
+            do{
+                try audioPlayer = AVAudioPlayer(data: sound.data)
+                audioPlayer.play ()
+                
+            }catch {
+                print ("Error: file \(soundName) cannot be played")
+            }
+            
+        }else {
+            print ("Error: file \(soundName) didnt load" )
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let selectedImage = info [UIImagePickerController.InfoKey.originalImage] as! UIImage
+        imageToPunch.image =  selectedImage
+        dismiss(animated: true, completion: nil)
+        
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func showAlert (title: String, message: String){
+        let alertController = UIAlertController (title: title, message: message, preferredStyle: .alert)
+        
+        let defaltAction = UIAlertAction (title: "ok", style: .default, handler: nil)
+        
+        alertController.addAction(defaltAction)
+        present(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+
 
     //MARK: ACTIONS
     @IBAction func cameraPressed(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            
+        }else {
+            showAlert(title: "Camera Not Available ", message: "There is no camera available on this device.")
+            
+        }
+        
+        imagePicker.sourceType = .camera
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     @IBAction func libraryPressed(_ sender: UIButton) {
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
        animateImage ()
+        playSound(soundName: "PunchSound", audioPlayer: &audioPlayer)
     }
 }
 
